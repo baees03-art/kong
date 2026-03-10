@@ -166,6 +166,17 @@ textarea {
     background-color: #0056b3;
 }
 
+.comments-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #ffffff; /* Disqus looks best on light background, or we can let it auto-theme */
+    border-radius: 10px;
+}
+
+[data-theme="dark"] .comments-section {
+    background-color: transparent;
+}
+
 @media (max-width: 600px) {
     h1 {
         font-size: 1.5rem;
