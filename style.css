@@ -106,6 +106,114 @@ button:hover {
     min-height: 24px;
 }
 
+.animal-test-section {
+    margin: 2rem 0;
+    padding: 1rem;
+}
+
+.animal-test-section h2 {
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.upload-container {
+    border: 2px dashed var(--button-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.upload-container:hover {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.upload-label {
+    cursor: pointer;
+}
+
+#upload-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+#loading {
+    margin: 2rem 0;
+    font-weight: bold;
+    color: #007bff;
+}
+
+#result-container {
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#result-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar-container {
+    height: 30px;
+    width: 100%;
+    background-color: #eee;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    height: 100%;
+    transition: width 1s ease-in-out;
+}
+
+.progress-bar.dog {
+    background-color: #ffca28; /* 강아지 - 노랑/주황 */
+}
+
+.progress-bar.cat {
+    background-color: #42a5f5; /* 고양이 - 파랑 */
+}
+
+.labels {
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.reset-btn {
+    background-color: #6c757d;
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+}
+
 .divider {
     margin: 3rem 0;
     border: none;

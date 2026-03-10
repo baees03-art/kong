@@ -17,6 +17,90 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
+// Animal Face Test Logic
+const URL = "https://teachablemachine.withgoogle.com/models/rC3H2BI6E/";
+let model, labelContainer, maxPredictions;
+
+async function initModel() {
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
+}
+
+initModel();
+
+const imageUpload = document.getElementById('image-upload');
+const uploadPreview = document.getElementById('upload-preview');
+const resultContainer = document.getElementById('result-container');
+const loading = document.getElementById('loading');
+const uploadContainer = document.getElementById('upload-container');
+
+imageUpload.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = event.target.result;
+        imgElement.onload = async () => {
+            uploadPreview.innerHTML = '';
+            uploadPreview.appendChild(imgElement);
+            
+            loading.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+            
+            const prediction = await model.predict(imgElement);
+            displayResults(prediction);
+        };
+    };
+    reader.readAsDataURL(file);
+});
+
+function displayResults(prediction) {
+    loading.classList.add('hidden');
+    resultContainer.classList.remove('hidden');
+
+    let dogScore = 0;
+    let catScore = 0;
+
+    for (let i = 0; i < maxPredictions; i++) {
+        const className = prediction[i].className;
+        const probability = (prediction[i].probability * 100).toFixed(0);
+        
+        if (className.includes("강아지") || className.toLowerCase().includes("dog")) {
+            dogScore = parseInt(probability);
+        } else if (className.includes("고양이") || className.toLowerCase().includes("cat")) {
+            catScore = parseInt(probability);
+        }
+    }
+
+    // Update Bars & Percents
+    document.getElementById('dog-bar').style.width = dogScore + "%";
+    document.getElementById('cat-bar').style.width = catScore + "%";
+    document.getElementById('dog-percent').textContent = dogScore;
+    document.getElementById('cat-percent').textContent = catScore;
+
+    const message = document.getElementById('result-message');
+    if (dogScore > catScore) {
+        message.innerHTML = "당신은 귀여운 <span style='color: #ffca28'>강아지상</span>이네요! 🐶";
+    } else if (catScore > dogScore) {
+        message.innerHTML = "당신은 매력적인 <span style='color: #42a5f5'>고양이상</span>이네요! 🐱";
+    } else {
+        message.innerHTML = "강아지와 고양이의 매력을 모두 가졌군요! ✨";
+    }
+}
+
+function resetTest() {
+    imageUpload.value = '';
+    uploadPreview.innerHTML = `
+        <span class="upload-icon">📸</span>
+        <p>사진을 클릭하여 업로드하세요</p>
+    `;
+    resultContainer.classList.add('hidden');
+}
+
 const songs = {
     kpop: [
         { title: 'BTS - Dynamite', videoId: 'gdZLi9oWNZg' },
