@@ -1,3 +1,23 @@
+:root {
+    --bg-color: #f4f4f4;
+    --container-bg: #ffffff;
+    --text-color: #333333;
+    --button-bg: #e0e0e0;
+    --button-text: #333333;
+    --button-hover: #d0d0d0;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --container-bg: #1e1e1e;
+    --text-color: #ffffff;
+    --button-bg: #333333;
+    --button-text: #ffffff;
+    --button-hover: #444444;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,60 +25,79 @@
 }
 
 body {
-    background-color: #121212;
-    color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
-    max-width: 90%;
+    width: 90%;
+    max-width: 800px;
     padding: 2rem;
-    border-radius: 10px;
-    background-color: #1e1e1e;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    background-color: var(--container-bg);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+#theme-toggle {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    margin: 0;
 }
 
 h1 {
     margin-bottom: 1.5rem;
     font-size: 2rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .buttons {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 button {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
     margin: 0.5rem;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     font-size: 1rem;
+    font-weight: 600;
 }
 
 button:hover {
-    background-color: #555;
-    transform: translateY(-2px);
+    background-color: var(--button-hover);
+    transform: translateY(-3px);
 }
 
 #player {
-    margin-bottom: 1rem;
+    margin: 2rem auto;
     width: 100%;
     max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
 }
 
 #song-title {
